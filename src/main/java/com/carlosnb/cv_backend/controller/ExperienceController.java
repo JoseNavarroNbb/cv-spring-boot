@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/experiences")
-@CrossOrigin(origins = "*") // Útil para conectar tu frontend en desarrollo
+@CrossOrigin(origins = "*")
 public class ExperienceController {
 
     private final ExperienceService experienceService;
@@ -29,7 +29,7 @@ public class ExperienceController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Integer id) { 
         if (experienceService.getExperienceById(id).isPresent()) {
             experienceService.deleteExperience(id);
             return ResponseEntity.noContent().build();

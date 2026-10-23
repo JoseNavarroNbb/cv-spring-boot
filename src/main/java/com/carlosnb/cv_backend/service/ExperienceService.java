@@ -7,12 +7,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service // Registra esta clase en el contenedor de dependencias (IoC)
+@Service
 public class ExperienceService {
 
     private final ExperienceRepository experienceRepository;
 
-    // Inyección de dependencias por constructor (Recomendado en Spring moderno)
     public ExperienceService(ExperienceRepository experienceRepository) {
         this.experienceRepository = experienceRepository;
     }
@@ -21,7 +20,8 @@ public class ExperienceService {
         return experienceRepository.findAll();
     }
 
-    public Optional<Experience> getExperienceById(Long id) {
+    // Cambiado de Long a Integer
+    public Optional<Experience> getExperienceById(Integer id) {
         return experienceRepository.findById(id);
     }
 
@@ -29,7 +29,8 @@ public class ExperienceService {
         return experienceRepository.save(experience);
     }
 
-    public void deleteExperience(Long id) {
+    // Cambiado de Long a Integer
+    public void deleteExperience(Integer id) {
         experienceRepository.deleteById(id);
     }
 }
