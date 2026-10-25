@@ -1,5 +1,6 @@
 package com.carlosnb.cv_backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDate;
@@ -7,21 +8,22 @@ import java.time.OffsetDateTime;
 
 @Data
 @Entity
-@Table(name = "experiencia_laboral") 
+@Table(name = "experiencia_laboral")
 public class Experience {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; // En tu SQL es 'integer', no 'Long'
+    private Integer id;
 
-    // NOTA ARQUITECTÓNICA: 
-    // Por ahora mapeamos las llaves foráneas como Integer simples para que compile rápido.
-    // En la Fase 3 las cambiaremos por relaciones @ManyToOne con las entidades Persona y Empresa.
-    @Column(name = "persona_id", nullable = false)
-    private Integer personaId;
+    // Relación con Persona (Muchas experiencias pertenecen a una persona)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "persona_id", nullable = false)
+    @JsonBackReference // Evita ciclo infinito
+    private Persona persona;
 
-    @Column(name = "empresa_id", nullable = false)
-    private Integer empresaId;
+    // Relación con Empresa
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empresa_id", nullable = false)
+    private Empresa empresa;
 
     @Column(nullable = false, length = 150)
     private String puesto;
