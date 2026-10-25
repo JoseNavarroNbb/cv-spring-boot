@@ -14,6 +14,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable()) // Deshabilitamos CSRF para pruebas en APIs REST
             .authorizeHttpRequests(auth -> auth
+                //ajustes
                 // Permitimos el acceso libre únicamente a tus endpoints públicos
                 .requestMatchers("/api/v1/public/**").permitAll()
                 // Cualquier otro endpoint (como los de administrador o gestión) requerirá autenticación
