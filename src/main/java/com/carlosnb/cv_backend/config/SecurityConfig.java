@@ -39,7 +39,11 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        // Permitir tu local y tu producción. 
+        // (Puedes usar "*" para pruebas, aunque no es recomendado en prod)
+        configuration.setAllowedOrigins(List.of(
+            "http://localhost:4200", 
+            "https://cv-angular-rho.vercel.app")); 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
